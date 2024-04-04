@@ -13,5 +13,11 @@
         <item name="android:windowSplashScreenBackground">@color/black</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_animated</item>
         <item name="android:windowSplashScreenAnimationDuration">1500</item>
+
     </style>
+    <style name="Theme.Game" parent="Theme.FinalProject">
+
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

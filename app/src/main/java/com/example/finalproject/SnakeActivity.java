@@ -4,13 +4,23 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
+import android.view.Window;
 
-public class SnakeActivity extends Activity {
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class SnakeActivity extends AppCompatActivity {
     SnakeEngine snakeEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
+        Window window = getWindow();
+        //מוריד את השורה התחתונה
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+
 
         // קבל את מידות הפיקסלים של המסך
         Display display = getWindowManager().getDefaultDisplay();
