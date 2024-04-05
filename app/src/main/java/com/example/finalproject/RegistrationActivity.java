@@ -41,18 +41,22 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         capturedImage = findViewById(R.id.capturedImage);
-        findViewById(R.id.cameraBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkPermissionAndOpenCamera();
-            }
-        });
+        findViewById(R.id.toLogin).setOnClickListener(this::toLogin);
         findViewById(R.id.cameraNextBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerUser(view);
+
+                //TODO: implement camera
+                checkPermissionAndOpenCamera();
+
+                registerUser();
             }
         });
+    }
+
+    private void toLogin(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private void checkPermissionAndOpenCamera() {
@@ -90,7 +94,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    public void registerUser(View view) {
+    public void registerUser() {
 
         EditText usernameInput = findViewById(R.id.usernameInput);
         EditText passwordInput = findViewById(R.id.passwordInput);

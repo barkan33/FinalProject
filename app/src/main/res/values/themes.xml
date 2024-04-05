@@ -39,7 +39,7 @@
         <item name="colorPrimaryDark">#1565C0</item>
         <item name="colorAccent">#FF4081</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:actionModeBackground">#546E7A</item>
+        <!--        <item name="android:actionModeBackground">#546E7A</item>-->
         <item name="android:dialogTheme">@style/Dialog.Theme</item>
     </style>
 
@@ -49,4 +49,9 @@
         <item name="android:textColor">#999999</item>
     </style>
 
+    <style name="EditText.Grey" parent="BaseTheme">
+        <item name="colorControlActivated">#666666</item>
+        <item name="colorControlHighlight">#666666</item>
+        <item name="colorControlNormal">#999999</item>
+    </style>
 </resources>

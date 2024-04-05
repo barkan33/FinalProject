@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import kotlin.NotImplementedError;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -19,6 +21,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         findViewById(R.id.LoginBtn).setOnClickListener(this::loginUser);
+        findViewById(R.id.registerBtn).setOnClickListener(this::registerUser);
+        findViewById(R.id.forgot_password).setOnClickListener(this::forgotPassword);
+    }
+
+    private void forgotPassword(View view) {
+        try {
+            throw new NotImplementedError("Forgot password");
+        } catch (NotImplementedError e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void loginUser(View view) {
@@ -39,8 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (user != null && username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
-
             MyApplication myApplication = (MyApplication) getApplicationContext();
             myApplication.setCurrentUser(user);
 
