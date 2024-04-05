@@ -50,9 +50,7 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:background="@drawable/circle_shape_white"
-                android:padding="25dp"
-                app:srcCompat="@drawable/ic_photo_camera"
-                app:tint="#cccccc" />
+                app:srcCompat="@drawable/ic_photo_camera" />
 
 
             <androidx.cardview.widget.CardView

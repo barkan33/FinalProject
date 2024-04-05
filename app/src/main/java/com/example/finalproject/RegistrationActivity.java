@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,14 +10,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -24,13 +24,12 @@ import androidx.core.content.ContextCompat;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 public class RegistrationActivity extends AppCompatActivity {
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 101;
     private static final int GET_IMAGE_REQUEST_CODE = 102;
-    ImageView capturedImage;
+    ImageView capturedImageView;
     Bitmap capturedImageBitmap;
     public static final String PREFS_NAME = "UserData";
 
@@ -40,19 +39,35 @@ public class RegistrationActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_registration);
 
-        capturedImage = findViewById(R.id.capturedImage);
+        capturedImageView = findViewById(R.id.capturedImage);
+        capturedImageView.setOnClickListener(this::showOptionsDialog);
         findViewById(R.id.toLogin).setOnClickListener(this::toLogin);
-        findViewById(R.id.cameraNextBtn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.cameraNextBtn).setOnClickListener(this::registerUser);
+    }
+
+    public void showOptionsDialog(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose an Option");
+
+        builder.setCancelable(true);
+        builder.setPositiveButton("Take Picture", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                //TODO: implement camera
+            public void onClick(DialogInterface dialog, int which) {
                 checkPermissionAndOpenCamera();
-
-                registerUser();
             }
         });
+
+        builder.setNegativeButton("Choose From Gallery", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                chooseImageFromGallery();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
+
 
     private void toLogin(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -79,13 +94,13 @@ public class RegistrationActivity extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             capturedImageBitmap = (Bitmap) extras.get("data");
-            capturedImage.setImageBitmap(capturedImageBitmap);
+            capturedImageView.setImageBitmap(capturedImageBitmap);
         } else if (requestCode == GET_IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
                 Uri selectedImageUri = data.getData();
                 try {
                     capturedImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                    capturedImage.setImageBitmap(capturedImageBitmap);
+                    capturedImageView.setImageBitmap(capturedImageBitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(this, "Error loading image", Toast.LENGTH_SHORT).show();
@@ -94,7 +109,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    public void registerUser() {
+    public void registerUser(View view) {
 
         EditText usernameInput = findViewById(R.id.usernameInput);
         EditText passwordInput = findViewById(R.id.passwordInput);
@@ -158,7 +173,7 @@ public class RegistrationActivity extends AppCompatActivity {
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 
-    public void chooseImageFromGallery(View view) {
+    public void chooseImageFromGallery() {
         Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(pickPhotoIntent, 102); // Use a different request code than the camera
     }
