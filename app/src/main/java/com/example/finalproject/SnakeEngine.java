@@ -2,7 +2,6 @@ package com.example.finalproject;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -12,6 +11,7 @@ import java.util.Random;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.widget.Toast;
 
 
 class SnakeEngine extends SurfaceView implements Runnable {
@@ -62,11 +62,13 @@ class SnakeEngine extends SurfaceView implements Runnable {
     private SurfaceHolder surfaceHolder;
     private Paint paint;
 
-    public SnakeEngine(Context context, Point size) {
+    private User currentUser;
+
+    public SnakeEngine(Context context, Point size, User currentUser) {
         super(context);
 
-        context = context;
-
+        this.context = context;
+        this.currentUser = currentUser;
         screenX = size.x;
         screenY = size.y;
 
@@ -203,18 +205,26 @@ class SnakeEngine extends SurfaceView implements Runnable {
         moveSnake();
 
         if (detectDeath()) {
+            upDateScore();
             newGame();
         }
     }
 
+    private void upDateScore() {
+        int currentScore = currentUser.GetScoreSnake();
+        if (score > currentScore) {
+            currentUser.SetScoreSnake(score);
+            canvas.drawText("New high score!", 10, 70, paint);
+
+        }
+    }
 
     public void draw() {
         if (surfaceHolder.getSurface().isValid()) {
             canvas = surfaceHolder.lockCanvas();
 
             // צבע רקע
-//            canvas.drawColor(Color.argb(255, 26, 128, 182));
-            int myColor = getResources().getColor(R.color.primary);
+            int myColor = getResources().getColor(R.color.BGColor);
             canvas.drawColor(myColor);
 
             // צבע נחש

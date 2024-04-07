@@ -12,6 +12,9 @@ public class User implements Serializable {
     private String carModel;
     private String base64Image;
 
+    private int highestScoreSnake;
+    private int highestScoreNumbers;
+
     public User(String username, String password, String email, String carModel, String base64Image) {
         this.username = username;
         this.password = password;
@@ -60,4 +63,19 @@ public class User implements Serializable {
         this.base64Image = base64Image;
     }
 
+    public int GetScoreSnake() {
+        return highestScoreSnake;
+    }
+
+    public void SetScoreSnake(int score) {
+        this.highestScoreSnake = score;
+    }
+
+    public int getScore() {
+        return highestScoreNumbers;
+    }
+
+    public void setScore(int level) {
+        this.highestScoreNumbers = level;
+    }
 }

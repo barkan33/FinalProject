@@ -17,11 +17,16 @@ public class GameActivity extends AppCompatActivity {
     private int level = 1;
     private EditText guessInput;
     private TextView infoText;
+    User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        currentUser = myApplication.getCurrentUser();
 
         guessInput = findViewById(R.id.GuessInput);
         infoText = findViewById(R.id.InfoText);
@@ -34,11 +39,13 @@ public class GameActivity extends AppCompatActivity {
             }
         });
     }
+
     private void generateRandomNumber() {
         Random random = new Random();
         int maxNumber = 10 * level;
         randomNumber = random.nextInt(maxNumber) + 1;
     }
+
     public void guessNumber(View view) {
 
 
@@ -50,6 +57,11 @@ public class GameActivity extends AppCompatActivity {
                 generateRandomNumber();
                 infoText.setText("Guess a number between 1 and " + 10 * level);
                 guessInput.setText("");
+                int currentScore = currentUser.getScore();
+                if (level > currentScore) {
+                    currentUser.setScore(level);
+                    Toast.makeText(this, "New high score!", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 String message = guess > randomNumber ? "Try a lower number" : "Try a higher number";
                 infoText.setText(message);

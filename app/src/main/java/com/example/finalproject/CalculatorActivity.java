@@ -13,9 +13,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class CalculatorActivity extends AppCompatActivity {
     private TextView resultTextView;
-    private String currentNumber = "";
-    private String operator = "";
-    private double firstNumber = 0;
+    private StringBuilder currentNumber;
+    private double operand1;
+    private double operand2;
+    private char operator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,49 +24,70 @@ public class CalculatorActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_calculator);
         resultTextView = findViewById(R.id.resultTextView);
-        
+        currentNumber = new StringBuilder();
+
+
     }
 
     public void numberClick(View view) {
         Button button = (Button) view;
-        currentNumber += button.getText().toString();
-        resultTextView.setText(currentNumber);
+        currentNumber.append(button.getText().toString());
+        resultTextView.setText(currentNumber.toString());
+        if (resultTextView.getText().toString().length() > 12) {
+            resultTextView.setTextSize(30);
+        }
     }
 
     public void operatorClick(View view) {
+        if (currentNumber.length() < 1) {
+            return;
+        }
         Button button = (Button) view;
-        operator = button.getText().toString();
-        firstNumber = Double.parseDouble(currentNumber);
-        currentNumber = "";
-        //resultTextView.setText(operator);
+        operator = button.getText().toString().charAt(0);
+        operand1 = Double.parseDouble(currentNumber.toString());
+        currentNumber.setLength(0);
     }
 
     public void equalsClick(View view) {
-        double secondNumber = Double.parseDouble(currentNumber);
+        if (currentNumber.length() < 1 || operator == ' ') {
+            return;
+        }
+        operand2 = Double.parseDouble(currentNumber.toString());
+        double result = performOperation(operand1, operand2, operator);
+        resultTextView.setText(String.valueOf(result));
+        currentNumber.setLength(0);
+    }
+
+    private double performOperation(double operand1, double operand2, char operator) {
         double result = 0;
         switch (operator) {
-            case "+":
-                result = firstNumber + secondNumber;
+            case '+':
+                result = operand1 + operand2;
                 break;
-            case "-":
-                result = firstNumber - secondNumber;
+            case '-':
+                result = operand1 - operand2;
                 break;
-            case "*":
-                result = firstNumber * secondNumber;
+            case '*':
+                result = operand1 * operand2;
                 break;
-            case "/":
-                result = firstNumber / secondNumber;
+            case '/':
+                if (operand2 != 0) {
+                    result = operand1 / operand2;
+                } else {
+                    resultTextView.setText("ERROR: Divide by 0");
+                }
                 break;
         }
-        resultTextView.setText(String.valueOf(result));
-        currentNumber = String.valueOf(result);
-        operator = "";
+        return result;
     }
 
     public void clearClick(View view) {
-        currentNumber = "";
-        operator = "";
-        firstNumber = 0;
-        resultTextView.setText("0");
+        currentNumber.setLength(0);
+        resultTextView.setText("");
+        operand1 = 0;
+        operand2 = 0;
+        operator = ' ';
     }
+
+
 }

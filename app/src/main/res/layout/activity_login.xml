@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".LoginActivity"
-    android:background="#263238">
+    style="@style/pageBG">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,11 +61,9 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="#90A4AE"
-                    android:theme="@style/EditText.Grey" />
+                    android:theme="@style/EditText.Grey"
+                    android:layout_marginBottom="20dp" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -89,11 +87,9 @@
                     android:textColor="#90A4AE"
                     android:theme="@style/EditText.Grey" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="10dp" />
 
                 <TextView
+                    android:layout_marginVertical="10dp"
                     android:id="@+id/forgot_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,26 +101,17 @@
                     android:textColor="#78909C"
                     android:textStyle="bold" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="15dp" />
 
                 <Button
+                    style="@style/MyButton"
                     android:id="@+id/LoginBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:layout_marginLeft="-4dp"
-                    android:layout_marginRight="-4dp"
-                    android:background="@drawable/btn_rounded_green_300"
                     android:text="Login"
-                    android:textAllCaps="false"
-                    android:textColor="#263238" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="5dp" />
+                    android:textAllCaps="false" />
 
                 <LinearLayout
+                    android:layout_marginVertical="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

@@ -20,6 +20,8 @@ public class SnakeActivity extends AppCompatActivity {
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
 
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        User currentUser = myApplication.getCurrentUser();
 
         // קבל את מידות הפיקסלים של המסך
         Display display = getWindowManager().getDefaultDisplay();
@@ -28,10 +30,12 @@ public class SnakeActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
 
-        snakeEngine = new SnakeEngine(this, size);
+        snakeEngine = new SnakeEngine(this, size, currentUser);
 
         // Make snakeEngine the view of the Activity
         setContentView(snakeEngine);
+
+
     }
 
 

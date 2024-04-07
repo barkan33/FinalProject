@@ -5,18 +5,52 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ProfileActivity extends AppCompatActivity {
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class ProfileActivity extends MainActivity {
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.navigation_1) {
+            Intent intent = new Intent(this, SnakeActivity.class);
+            startActivity(intent);
+            return true;
+
+        } else if (menuItem.getItemId() == R.id.navigation_2) {
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+            return true;
+
+        } else if (menuItem.getItemId() == R.id.navigation_3) {
+            Intent intent = new Intent(this, CalculatorActivity.class);
+            startActivity(intent);
+            return true;
+
+        } else if (menuItem.getItemId() == R.id.navigation_4) {
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         MyApplication myApplication = (MyApplication) getApplicationContext();
         User currentUser = myApplication.getCurrentUser();
@@ -26,10 +60,14 @@ public class ProfileActivity extends AppCompatActivity {
             TextView emailText = findViewById(R.id.profileEmail);
             TextView carModelText = findViewById(R.id.profileCarModel);
             ImageView profileImage = findViewById(R.id.profileImage);
+            TextView snakeScoreText = findViewById(R.id.profileSnakeScore);
+            TextView guessScoreText = findViewById(R.id.profileGuessScore);
 
-            usernameText.setText("Username: " + currentUser.getUsername());
-            emailText.setText("Email: " + currentUser.getEmail());
-            carModelText.setText("Car Model: " + currentUser.getCarModel());
+            usernameText.setText(currentUser.getUsername());
+            emailText.setText(currentUser.getEmail());
+            carModelText.setText(currentUser.getCarModel());
+            snakeScoreText.setText("Snake Score: " + currentUser.GetScoreSnake());
+            guessScoreText.setText("Guess Score: " + currentUser.getScore());
 
             if (currentUser.getBase64Image() != null) {
                 byte[] decodedString = Base64.decode(currentUser.getBase64Image(), Base64.DEFAULT);
@@ -39,5 +77,12 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No user logged in", Toast.LENGTH_SHORT).show();
         }
+        initializeProfile();
+        findViewById(R.id.fab).setOnClickListener(this::someFunction);
+    }
+
+
+    private void someFunction(View view) {
+        Toast.makeText(this, "Some function", Toast.LENGTH_SHORT).show();
     }
 }
