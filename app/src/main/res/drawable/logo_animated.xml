@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/wheel">
+    android:drawable="@drawable/car_metal_steel_svgrepo_com">
     <target
-        android:name="logoGroup"
+
+        android:name="logoGroup2"
         android:animation="@animator/wheel_animator" />
 </animated-vector>

@@ -9,8 +9,9 @@
         <item name="android:background">@color/BGColor</item>
     </style>
 
-    <style name="MyCalcButton" parent="MyButton">
-        <item name="android:background">@drawable/btn_square_green</item>
+    <style name="MyCalcButton" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@color/BGColor</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Material3.Button</item>
     </style>
 
     <style name="MyButton" parent="Widget.Material3.Button">
@@ -22,4 +23,8 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="CircularFloatingActionButton" parent="">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Circular</item>
+        <item name="tint">@color/white</item>
+    </style>
 </resources>

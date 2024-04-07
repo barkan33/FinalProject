@@ -56,11 +56,26 @@
     </style>
 
     <style name="MyCalcButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/btn_square_green</item>
+        <!--        <item name="android:background">@drawable/btn_square_green</item>-->
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Material3.Button</item>
+
     </style>
 
+    <style name="ShapeAppearanceOverlay.Material3.Button" parent="">
+        <item name="cornerSize">0%</item>
+    </style>
 
     <style name="DarkProfileText">
         <item name="android:textColor">@color/BGColor</item>
     </style>
+
+    <style name="CircularFloatingActionButton" parent="">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Circular</item>
+        <item name="tint">@color/BGColor</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.Circular" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

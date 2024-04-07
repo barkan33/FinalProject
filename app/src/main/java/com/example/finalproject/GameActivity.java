@@ -15,6 +15,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
     private int randomNumber;
     private int level = 1;
+    private int attempts = 0;
     private EditText guessInput;
     private TextView infoText;
     User currentUser;
@@ -51,6 +52,7 @@ public class GameActivity extends AppCompatActivity {
 
         try {
             int guess = Integer.parseInt(guessInput.getText().toString());
+            attempts++;
             if (guess == randomNumber) {
                 level++;
                 Toast.makeText(this, "Correct! You advanced to level " + level, Toast.LENGTH_SHORT).show();
@@ -58,6 +60,8 @@ public class GameActivity extends AppCompatActivity {
                 infoText.setText("Guess a number between 1 and " + 10 * level);
                 guessInput.setText("");
                 int currentScore = currentUser.getScore();
+                attempts = 0;
+
                 if (level > currentScore) {
                     currentUser.setScore(level);
                     Toast.makeText(this, "New high score!", Toast.LENGTH_SHORT).show();
@@ -65,9 +69,20 @@ public class GameActivity extends AppCompatActivity {
             } else {
                 String message = guess > randomNumber ? "Try a lower number" : "Try a higher number";
                 infoText.setText(message);
+                if (attempts > logBase2(10 * level)) {
+                    if (level > 1) {
+                        level--;
+                    }
+                    attempts = 0;
+                    Toast.makeText(this, "Your level was decreased to " + level + ". Keep trying!", Toast.LENGTH_SHORT).show();
+                }
             }
         } catch (NumberFormatException e) {
             infoText.setText("Please enter a number");
         }
+    }
+
+    private int logBase2(int i) {
+        return (int) (Math.log(i) / Math.log(2));
     }
 }

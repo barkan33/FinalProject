@@ -11,8 +11,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="@style/pageBG">
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="match_parent"
@@ -311,16 +310,19 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
+            style="@style/CircularFloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="76dp"
+            android:background="@drawable/circle_shape_white"
             android:clickable="true"
+            android:contentDescription="Create a new note"
             app:backgroundTint="@color/primary"
             app:layout_anchor="@id/nested_scroll_view"
-            app:srcCompat="@drawable/ic_create"
-            android:contentDescription="Create a new note"
             app:layout_anchorGravity="bottom|right|end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="76dp" />
+            app:srcCompat="@drawable/ic_create" />
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -335,11 +337,16 @@
                 android:layout_height="60dp"
                 android:layout_alignParentBottom="true"
                 android:background="@color/primary"
+                android:clickable="false"
                 app:itemIconSize="40dp"
                 app:itemIconTint="@color/BGColor"
                 app:itemTextColor="@color/BGColor"
                 app:labelVisibilityMode="unlabeled"
-                app:menu="@menu/menu_bottom_navigation_shop" />
+                app:menu="@menu/menu_bottom_navigation_shop">
+
+
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+
         </RelativeLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
