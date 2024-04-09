@@ -36,6 +36,9 @@ public class ProfileActivity extends MainActivity {
             return true;
 
         } else if (menuItem.getItemId() == R.id.navigation_4) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         }
         return false;

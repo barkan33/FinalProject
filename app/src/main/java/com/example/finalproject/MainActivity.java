@@ -41,23 +41,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        if (menuItem.getItemId() == R.id.navigation_1) {
-            Intent intent = new Intent(MainActivity.this, SnakeActivity.class);
+        if (menuItem.getItemId() == R.id.navigation_0) {
+            return true;
+
+        } else if (menuItem.getItemId() == R.id.navigation_1) {
+            Intent intent = new Intent(this, SnakeActivity.class);
             startActivity(intent);
             return true;
 
         } else if (menuItem.getItemId() == R.id.navigation_2) {
-            Intent intent = new Intent(MainActivity.this, GameActivity.class);
+            Intent intent = new Intent(this, GameActivity.class);
             startActivity(intent);
             return true;
 
         } else if (menuItem.getItemId() == R.id.navigation_3) {
-            Intent intent = new Intent(MainActivity.this, CalculatorActivity.class);
+            Intent intent = new Intent(this, CalculatorActivity.class);
             startActivity(intent);
             return true;
 
         } else if (menuItem.getItemId() == R.id.navigation_4) {
-            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
             return true;
         }
