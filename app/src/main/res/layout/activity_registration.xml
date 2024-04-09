@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,30 +8,25 @@
     style="@style/pageBG"
     tools:ignore="HardcodedText">
 
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:scrollbars="none"
-        android:scrollingCache="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="40dp">
+            android:focusableInTouchMode="true"
+            android:layout_marginHorizontal="40dp">
 
-
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/capturedImage"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:background="@drawable/circle_shape_white"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/circleImageViewStyle"
                 app:srcCompat="@drawable/ic_photo_camera" />
 
 
@@ -41,7 +35,7 @@
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="5dp"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -96,7 +90,7 @@
                 android:layout_marginTop="10dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="5dp"
-                app:cardElevation="8dp"
+                app:cardElevation="3dp"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -179,4 +173,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</RelativeLayout>
+</LinearLayout>

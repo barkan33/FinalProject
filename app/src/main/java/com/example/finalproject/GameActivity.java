@@ -2,23 +2,23 @@ package com.example.finalproject;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends BaseActivity {
     private int randomNumber;
     private int level = 1;
     private int attempts = 0;
     private EditText guessInput;
     private TextView infoText;
+    private TextView messageText;
     User currentUser;
+    MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,12 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        MyApplication myApplication = (MyApplication) getApplicationContext();
+        myApplication = (MyApplication) getApplicationContext();
         currentUser = myApplication.getCurrentUser();
 
         guessInput = findViewById(R.id.GuessInput);
         infoText = findViewById(R.id.InfoText);
+        messageText = findViewById(R.id.MessageText);
         generateRandomNumber();
         findViewById(R.id.GuessBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +53,11 @@ public class GameActivity extends AppCompatActivity {
 
         try {
             int guess = Integer.parseInt(guessInput.getText().toString());
+            messageText.setText("");
             attempts++;
             if (guess == randomNumber) {
                 level++;
-                Toast.makeText(this, "Correct! You advanced to level " + level, Toast.LENGTH_SHORT).show();
+                messageText.setText("Congrats! You advanced to level " + level);
                 generateRandomNumber();
                 infoText.setText("Guess a number between 1 and " + 10 * level);
                 guessInput.setText("");
@@ -64,7 +66,8 @@ public class GameActivity extends AppCompatActivity {
 
                 if (level > currentScore) {
                     currentUser.setScore(level);
-                    Toast.makeText(this, "New high score!", Toast.LENGTH_SHORT).show();
+                    myApplication.saveCurrentUser(currentUser);
+                    messageText.setText("New high score!");
                 }
             } else {
                 String message = guess > randomNumber ? "Try a lower number" : "Try a higher number";
@@ -74,11 +77,11 @@ public class GameActivity extends AppCompatActivity {
                         level--;
                     }
                     attempts = 0;
-                    Toast.makeText(this, "Your level was decreased to " + level + ". Keep trying!", Toast.LENGTH_SHORT).show();
+                    messageText.setText("Your level was decreased to " + level + ". Keep trying!");
                 }
             }
         } catch (NumberFormatException e) {
-            infoText.setText("Please enter a number");
+            messageText.setText("Please enter a number");
         }
     }
 

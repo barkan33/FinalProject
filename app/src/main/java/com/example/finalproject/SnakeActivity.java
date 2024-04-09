@@ -10,7 +10,7 @@ import android.view.Window;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SnakeActivity extends AppCompatActivity {
+public class SnakeActivity extends BaseActivity {
     SnakeEngine snakeEngine;
 
     @Override
@@ -21,7 +21,6 @@ public class SnakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         MyApplication myApplication = (MyApplication) getApplicationContext();
-        User currentUser = myApplication.getCurrentUser();
 
         // קבל את מידות הפיקסלים של המסך
         Display display = getWindowManager().getDefaultDisplay();
@@ -30,7 +29,7 @@ public class SnakeActivity extends AppCompatActivity {
         Point size = new Point();
         display.getSize(size);
 
-        snakeEngine = new SnakeEngine(this, size, currentUser);
+        snakeEngine = new SnakeEngine(this, size, myApplication);
 
         // Make snakeEngine the view of the Activity
         setContentView(snakeEngine);

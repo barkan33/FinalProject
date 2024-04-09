@@ -63,12 +63,17 @@ class SnakeEngine extends SurfaceView implements Runnable {
     private Paint paint;
 
     private User currentUser;
+    MyApplication myApplication;
 
-    public SnakeEngine(Context context, Point size, User currentUser) {
+    public SnakeEngine(Context context, Point size, MyApplication myApplication) {
         super(context);
 
         this.context = context;
-        this.currentUser = currentUser;
+        this.myApplication = myApplication;
+
+        myApplication = (MyApplication) context.getApplicationContext();
+        currentUser = myApplication.getCurrentUser();
+
         screenX = size.x;
         screenY = size.y;
 
@@ -214,6 +219,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
         int currentScore = currentUser.GetScoreSnake();
         if (score > currentScore) {
             currentUser.SetScoreSnake(score);
+            myApplication.saveCurrentUser(currentUser);
             canvas.drawText("New high score!", 10, 70, paint);
 
         }

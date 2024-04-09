@@ -12,12 +12,17 @@
         android:scaleType="centerCrop"
         android:background="@color/BGColor" />
 
-    <ImageView
+
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/sideProfileImage"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_margin="15dp"
-        android:src="@drawable/ic_person" />
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+
+        app:shapeAppearanceOverlay="@style/circleImageViewStyle"
+        app:srcCompat="@drawable/ic_photo_camera" />
 
     <LinearLayout
         android:layout_width="match_parent"

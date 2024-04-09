@@ -13,7 +13,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -178,7 +178,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="-"
-                android:onClick="operatorClick"
+                android:onClick="negateClick"
                 android:layout_weight="0.7"
                 style="?android:attr/buttonBarButtonStyle"
                 android:scaleX="2.5"
@@ -214,15 +214,16 @@
                 android:onClick="numberClick" />
 
             <Button
-                android:id="@+id/buttonEq"
+                android:id="@+id/buttonAbc"
                 style="@style/MyCalcButton"
                 android:textSize="19sp"
                 app:cornerRadius="0dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="="
-                android:onClick="equalsClick" />
+                android:text="."
+                android:fontFamily="serif"
+                android:onClick="numberClick" />
 
             <Button
                 android:id="@+id/buttonPlus"
@@ -236,6 +237,61 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:scaleX="2.5"
                 android:scaleY="2.5" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonPower"
+                style="@style/MyCalcButton"
+                android:textSize="19sp"
+                app:cornerRadius="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="^"
+                android:onClick="operatorClick" />
+
+            <Button
+                android:id="@+id/buttonSqrt"
+                style="@style/MyCalcButton"
+                android:textSize="19sp"
+                app:cornerRadius="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="√"
+                android:onClick="sqrtClick" />
+
+            <Button
+                android:id="@+id/buttonEq"
+                style="@style/MyCalcButton"
+                android:textSize="19sp"
+                app:cornerRadius="0dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="="
+                android:onClick="equalsClick" />
+
+            <Button
+                android:id="@+id/buttonModulo"
+                android:textSize="19sp"
+                android:background="@drawable/btn_square_green"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="%"
+                android:onClick="operatorClick"
+                android:layout_weight="0.7"
+                style="?android:attr/buttonBarButtonStyle"
+                android:scaleX="2.5"
+                android:scaleY="2.5" />
+
 
         </LinearLayout>
     </LinearLayout>

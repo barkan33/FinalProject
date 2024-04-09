@@ -17,21 +17,24 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Map;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends BaseActivity {
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 101;
     private static final int GET_IMAGE_REQUEST_CODE = 102;
+    private static final int STORAGE_PERMISSION_CODE = 103;
+
     ImageView capturedImageView;
     Bitmap capturedImageBitmap;
-    public static final String PREFS_NAME = "UserData";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,11 +143,15 @@ public class RegistrationActivity extends AppCompatActivity {
 
             String base64Image = encodeBitmapToBase64(capturedImageBitmap);
             User newUser = new User(username, password, email, carModel, base64Image);
-            Toast.makeText(this, "User created: " + newUser.getUsername(), Toast.LENGTH_SHORT).show();
-            saveUserToPrefs(newUser);
+//            Toast.makeText(this, "User created: " + newUser.getUsername(), Toast.LENGTH_SHORT).show();
+            addUserToDictPref(newUser);
+
+            MyApplication myApplication = (MyApplication) getApplicationContext();
+            myApplication.setCurrentUser(newUser);
+
             Intent intent = new Intent(RegistrationActivity.this, ProfileActivity.class);
-            intent.putExtra("user", newUser);
             startActivity(intent);
+            finish();
 
         } catch (IllegalArgumentException e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -161,9 +168,15 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private boolean isUserRegistered(String username) {
-        SharedPreferences sharedPreferences = getSharedPreferences(RegistrationActivity.PREFS_NAME, MODE_PRIVATE);
-        String storedUsername = sharedPreferences.getString("username", "");
-        return !storedUsername.isEmpty() && storedUsername.equals(username);
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String userDictJson = sharedPreferences.getString("user_dict_json", "{}");
+        Gson gson = new Gson();
+        Map<String, User> userDict = gson.fromJson(userDictJson, new TypeToken<Map<String, User>>() {
+        }.getType());
+        if (userDict == null) {
+            return false;
+        }
+        return userDict.containsKey(username);
     }
 
     private String encodeBitmapToBase64(Bitmap bitmap) {
@@ -174,18 +187,14 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void chooseImageFromGallery() {
-        Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(pickPhotoIntent, 102); // Use a different request code than the camera
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+        } else {
+
+            Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(pickPhotoIntent, 102);
+        }
     }
 
-    private void saveUserToPrefs(User user) {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(user);  // Convert User object to JSON string
-        editor.putString("user_json", jsonString);
-
-        editor.apply();
-    }
 }

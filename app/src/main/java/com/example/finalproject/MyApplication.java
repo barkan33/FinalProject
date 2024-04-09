@@ -12,4 +12,8 @@ public class MyApplication extends Application {
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
+
+    public void saveCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class CalculatorActivity extends AppCompatActivity {
+public class CalculatorActivity extends BaseActivity {
     private TextView resultTextView;
     private StringBuilder currentNumber;
     private double operand1;
@@ -74,8 +75,18 @@ public class CalculatorActivity extends AppCompatActivity {
                 if (operand2 != 0) {
                     result = operand1 / operand2;
                 } else {
-                    resultTextView.setText("ERROR: Divide by 0");
+                    Toast.makeText(this, "ERROR: Divide by 0", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case '%':
+                if (operand2 != 0) {
+                    result = operand1 % operand2;
+                } else {
+                    Toast.makeText(this, "ERROR: Modulo by 0", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case '^':
+                result = Math.pow(operand1, operand2);
                 break;
         }
         return result;
@@ -89,5 +100,26 @@ public class CalculatorActivity extends AppCompatActivity {
         operator = ' ';
     }
 
+
+    public void sqrtClick(View view) {
+
+        if (currentNumber.length() < 1) {
+            return;
+        }
+        operand2 = Double.parseDouble(currentNumber.toString());
+        double result = Math.sqrt(operand2);
+        resultTextView.setText(String.valueOf(result));
+        currentNumber.setLength(0);
+
+    }
+
+    public void negateClick(View view) {
+        if (currentNumber.length() == 0) {
+            currentNumber.append("-");
+        } else {
+            operatorClick(view);
+        }
+        resultTextView.setText(currentNumber.toString());
+    }
 
 }

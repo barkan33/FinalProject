@@ -41,12 +41,15 @@
                     android:orientation="horizontal"
                     android:padding="25dp">
 
-                    <ImageView
+
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/profileImage"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="#00FFFFFF"
-                        android:src="@drawable/ic_person" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/circleImageViewStyle"
+                        app:srcCompat="@drawable/ic_photo_camera" />
 
 
                     <LinearLayout
