@@ -27,6 +27,10 @@
             android:id="@+id/navigation_4"
             android:icon="@drawable/ic_person"
             android:title="Profile" />
+        <item
+            android:id="@+id/navigation_5"
+            android:icon="@drawable/ic_favorites"
+            android:title="Minesweeper" />
     </group>
     <group
         android:id="@+id/grp_2"
