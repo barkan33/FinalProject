@@ -31,9 +31,7 @@ public class SnakeActivity extends BaseActivity {
 
         snakeEngine = new SnakeEngine(this, size, myApplication);
 
-        // Make snakeEngine the view of the Activity
         setContentView(snakeEngine);
-
 
     }
 

@@ -102,7 +102,7 @@
 
                 <Button
                     style="@style/MyButton"
-                    android:id="@+id/LoginBtn"
+                    android:id="@+id/loginBtn"
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:text="Login"

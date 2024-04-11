@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="172dp"
     android:orientation="vertical"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    style="@style/pageBG">
 
     <ImageView
         android:layout_width="match_parent"

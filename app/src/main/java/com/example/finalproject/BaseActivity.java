@@ -30,13 +30,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         MyApplication myApplication = (MyApplication) getApplicationContext();
         User currentUser = myApplication.getCurrentUser();
 
-//        userDict[currentUser.getUsername()] = currentUser;
+//        userDict[currentUser.getUsername()] = currentUser; // לא עבד
         userDict.replace(currentUser.getUsername(), currentUser);
 
 
         String updatedUserDictJson = gson.toJson(userDict);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("user_dict_json", updatedUserDictJson); // Use the correct key
+        editor.putString("user_dict_json", updatedUserDictJson);
         editor.apply();
     }
 
@@ -48,13 +48,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         Map<String, User> userDict = gson.fromJson(userDictJson, new TypeToken<Map<String, User>>() {
         }.getType());
 
-        // 2. Add the new user to the dictionary
         userDict.put(user.getUsername(), user);
 
-        // 3. Convert the updated dictionary back to JSON
         userDictJson = gson.toJson(userDict);
 
-        // 4. Save the updated JSON string back to SharedPreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user_dict_json", userDictJson);
         editor.apply();

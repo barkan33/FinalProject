@@ -1,10 +1,7 @@
 package com.example.finalproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -30,7 +27,7 @@ public class LoginActivity extends BaseActivity {
         logo.setImageResource(randLogo());
 
 
-        findViewById(R.id.LoginBtn).setOnClickListener(this::loginUser);
+        findViewById(R.id.loginBtn).setOnClickListener(this::loginUser);
         findViewById(R.id.registerBtn).setOnClickListener(this::registerUser);
         findViewById(R.id.forgot_password).setOnClickListener(this::forgotPassword);
     }
@@ -51,7 +48,7 @@ public class LoginActivity extends BaseActivity {
 
     private void forgotPassword(View view) {
         try {
-            throw new NotImplementedError("Forgot password");
+            throw new NotImplementedError("Forgot password Not Implemented");
         } catch (NotImplementedError e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -68,7 +65,6 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
-
 
         User user = getUserFromPrefByName(username);
 
@@ -91,12 +87,11 @@ public class LoginActivity extends BaseActivity {
         Gson gson = new Gson();
         Map<String, User> userDict = gson.fromJson(userDictJson, new TypeToken<Map<String, User>>() {
         }.getType());
+
         if (userDict == null) {
             return null;
         }
-        for (User user : userDict.values()) {
-            System.out.println("{" + user.getUsername() + ": " + user.getPassword() + ", " + user.getEmail() + " }");
-        }
+
         return userDict.get(username);
     }
 

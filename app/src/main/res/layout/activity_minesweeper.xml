@@ -2,19 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
+    android:background="@color/BGColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MinesweeperActivity">
 
 
     <LinearLayout
-        android:gravity="center"
+        android:id="@+id/gameLayout"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/gameLayout" />
+        android:orientation="vertical" />
 
 
 </RelativeLayout>

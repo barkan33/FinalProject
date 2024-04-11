@@ -82,6 +82,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         } else {
             Toast.makeText(this, "No user logged in", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
 
 

@@ -12,12 +12,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class CalculatorActivity extends BaseActivity {
+public class CalculatorActivity extends BaseActivity implements View.OnClickListener {
     private TextView resultTextView;
     private StringBuilder currentNumber;
     private double operand1;
     private double operand2;
     private char operator;
+
+    private int[] btnArr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,22 @@ public class CalculatorActivity extends BaseActivity {
         resultTextView = findViewById(R.id.resultTextView);
         currentNumber = new StringBuilder();
 
+        btnArr = new int[]{R.id.button0, R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.buttonDot, R.id.buttonMinus, R.id.buttonPlus, R.id.buttonDiv, R.id.buttonMul, R.id.buttonModulo, R.id.buttonEq, R.id.buttonC, R.id.buttonSqrt};
+
+        for (int i : btnArr) {
+            findViewById(i).setOnClickListener(this);
+        }
+
 
     }
 
     public void numberClick(View view) {
         Button button = (Button) view;
+        if (button.getText().toString().equals(".")) {
+            if (currentNumber.toString().contains(".")) {
+                return;
+            }
+        }
         currentNumber.append(button.getText().toString());
         resultTextView.setText(currentNumber.toString());
         if (resultTextView.getText().toString().length() > 12) {
@@ -57,6 +70,7 @@ public class CalculatorActivity extends BaseActivity {
         double result = performOperation(operand1, operand2, operator);
         resultTextView.setText(String.valueOf(result));
         currentNumber.setLength(0);
+        currentNumber.append(String.valueOf(result));
     }
 
     private double performOperation(double operand1, double operand2, char operator) {
@@ -122,4 +136,38 @@ public class CalculatorActivity extends BaseActivity {
         resultTextView.setText(currentNumber.toString());
     }
 
+    @Override
+    public void onClick(View v) {
+
+        for (int i = 0; i <= 10; i++) {
+            if (v.getId() == btnArr[i]) {
+                numberClick(v);
+                return;
+            }
+        }
+        if (v.getId() == btnArr[11]) {
+            negateClick(v);
+            return;
+        }
+        for (int i = 12; i <= 15; i++) {
+            if (v.getId() == btnArr[i]) {
+                operatorClick(v);
+                return;
+            }
+        }
+        if (v.getId() == btnArr[16]) {
+            equalsClick(v);
+            return;
+        }
+        if (v.getId() == btnArr[17]) {
+            clearClick(v);
+            return;
+        }
+        if (v.getId() == btnArr[18]) {
+            sqrtClick(v);
+            return;
+        }
+        return;
+
+    }
 }

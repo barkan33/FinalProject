@@ -185,13 +185,13 @@ class SnakeEngine extends SurfaceView implements Runnable {
     private boolean detectDeath() {
         boolean dead = false;
 
-        // פגע בקצה המסך
+        // בדיקה של פגיעה בגבולות המסך
         if (snakeXs[0] == -1) dead = true;
         if (snakeXs[0] >= NUM_BLOCKS_WIDE) dead = true;
         if (snakeYs[0] == -1) dead = true;
         if (snakeYs[0] == numBlocksHigh) dead = true;
 
-        // אחל את עצמו
+        // בדיקה של פגיעה בעצמו
         for (int i = snakeLength - 1; i > 0; i--) {
             if ((i > 4) && (snakeXs[0] == snakeXs[i]) && (snakeYs[0] == snakeYs[i])) {
                 dead = true;
@@ -233,7 +233,7 @@ class SnakeEngine extends SurfaceView implements Runnable {
             int myColor = getResources().getColor(R.color.BGColor);
             canvas.drawColor(myColor);
 
-            // צבע נחש
+            // צבע נחש והטקסט
             paint.setColor(Color.argb(255, 255, 255, 255));
 
             // גדול הטקסט שמציג את התוצאה
@@ -263,13 +263,13 @@ class SnakeEngine extends SurfaceView implements Runnable {
 
     public boolean updateRequired() {
 
-        // בדיקת אם צריך לעדכן את הפריים
+        // בדיקת אם צריך לעדכן את התמונה
         if (nextFrameTime <= System.currentTimeMillis()) {
 
             // הגדר מתי העדכון הבא יופעל
             nextFrameTime = System.currentTimeMillis() + MILLIS_PER_SECOND / FPS;
 
-            // החזר נכון כדי לעדכן ולצייר
+            // האם צריך לעדכן?
             return true;
         }
         return false;
