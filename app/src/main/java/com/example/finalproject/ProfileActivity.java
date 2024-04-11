@@ -20,7 +20,13 @@ public class ProfileActivity extends MainActivity {
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        if (menuItem.getItemId() == R.id.navigation_1) {
+        if (menuItem.getItemId() == R.id.navigation_0) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+
+        } else if (menuItem.getItemId() == R.id.navigation_1) {
             Intent intent = new Intent(this, SnakeActivity.class);
             startActivity(intent);
             return true;
@@ -39,6 +45,10 @@ public class ProfileActivity extends MainActivity {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
+            return true;
+        } else if (menuItem.getItemId() == R.id.navigation_5) {
+            Intent intent = new Intent(this, MinesweeperActivity.class);
+            startActivity(intent);
             return true;
         }
         return false;

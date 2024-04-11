@@ -355,12 +355,12 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
+        style="@style/slideMenu"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="false"
         app:headerLayout="@layout/include_drawer_header_news"
         app:itemIconTint="#999999"
-        app:itemTextColor="#263238"
         app:menu="@menu/menu_navigation_drawer_news" />
 </androidx.drawerlayout.widget.DrawerLayout>

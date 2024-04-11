@@ -106,8 +106,7 @@
                                 android:fontFamily="sans-serif-light"
                                 android:lineSpacingExtra="2dp"
                                 android:text="@string/short_lorem_ipsum"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@android:color/black" />
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -291,8 +290,7 @@
                                 android:fontFamily="sans-serif-light"
                                 android:lineSpacingExtra="2dp"
                                 android:text="@string/medium_lorem_ipsum"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@android:color/black" />
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                             <ImageView
                                 android:layout_marginTop="5dp"
@@ -489,8 +487,7 @@
                                 android:fontFamily="sans-serif-light"
                                 android:lineSpacingExtra="2dp"
                                 android:text="@string/long_lorem_ipsum"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                                android:textColor="@android:color/black" />
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
